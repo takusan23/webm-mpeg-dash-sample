@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- mediaPresentationDuration とかを指定しないと 再生時間がおかしい -->
+<MPD profiles="urn:hbbtv:dash:profile:isoff-live:2012,urn:mpeg:dash:profile:isoff-live:2011"
+  xmlns="urn:mpeg:dash:schema:mpd:2011"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:DASH:schema:MPD:2011 DASH-MPD.xsd">
+  <BaseURL>/</BaseURL>
+  <Period>
+
+    <AdaptationSet mimeType="video/webm" subsegmentAlignment="true">
+      <!-- MPEG-DASH の video/webm は h264 受け付けない？ vp9 にしたら動いた、そして多分 codecs に音声コーデックの指定もしてあげる必要がある -->
+      <Representation id="contents" codecs="vp9,opus" startWithSAP="1">
+        <!-- initialization には多分 webm のヘッダー部が含まれてるのを指定すればいいのかな -->
+        <!-- startNumber = 1 がいいのかな -->
+        <SegmentTemplate initialization="$RepresentationID$/file_0.webm" media="$RepresentationID$/file_$Number$.webm" startNumber="1" duration="5000" />
+      </Representation>
+    </AdaptationSet>
+
+  </Period>
+</MPD>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>MPEG-DASH</title>
+    <style>
+        video {
+            width: 640px;
+            height: 360px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <video id="videoPlayer" controls muted autoplay></video>
+    </div>
+    <script src="http://cdn.dashjs.org/latest/dash.all.debug.js"></script>
+    <script>
+        (function () {
+            var url = "manifest.mpd";
+            var player = dashjs.MediaPlayer().create();
+            player.initialize(document.querySelector("#videoPlayer"), url, true);
+        })();
+    </script>
+</body>
+
+</html>
